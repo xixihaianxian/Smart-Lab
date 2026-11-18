@@ -1,4 +1,4 @@
-﻿import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
@@ -22,6 +22,18 @@ const router = createRouter({
       name: 'help',
       component: () => import('../views/WorkspaceView.vue'),
       meta: { title: '使用帮助' },
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/login.vue'),
+      meta: { title: '登录' },
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('../views/register.vue'),
+      meta: { title: '注册' },
     },
     { path: '/:pathMatch(.*)*', redirect: '/' },
   ],

@@ -44,7 +44,10 @@ function navigate(path) {
 </script>
 
 <template>
-  <div class="app-shell">
+  <div v-if="route.name === 'login' || route.name === 'register'" class="login-route">
+    <router-view />
+  </div>
+  <div v-else class="app-shell">
     <header class="topbar">
       <div class="topbar-brand">
         <el-button
@@ -65,8 +68,10 @@ function navigate(path) {
       <div class="topbar-right">
         <span class="today"><el-icon><Sunny /></el-icon>{{ today }}</span>
         <span class="topbar-divider"></span>
-        <span class="user-avatar" aria-label="用户头像">S</span>
-        <span class="user-name">你好，访客</span>
+        <router-link to="/login" class="account-link" aria-label="前往登录页面">
+          <span class="user-avatar" aria-hidden="true">S</span>
+          <span class="user-name">你好，访客</span>
+        </router-link>
       </div>
     </header>
 
