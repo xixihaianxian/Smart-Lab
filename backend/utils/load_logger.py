@@ -9,10 +9,12 @@ from datetime import datetime
 # 登录env
 load_dotenv(Path(__file__).parent.parent / ".env")
 
-logger_format = "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | "
-"<level>{level: <8}</level> | "
-"<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - "
-"<level>{message}</level>"
+logger_format = (
+    "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | "
+    "<level>{level: <8}</level> | "
+    "<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - "
+    "<level>{message}</level>"
+)
 
 def logger_bar(log_file:Optional[str]=None):
     logger.remove()
@@ -22,10 +24,9 @@ def logger_bar(log_file:Optional[str]=None):
         colorize=True,
         level=os.environ["LEVEL"],
         format=logger_format,
-        serialize=True,
         backtrace=True,
         diagnose=True,
-        enqueue=True
+        enqueue=True,
     )
     # 文件日志配置
     if log_file is None:
@@ -38,4 +39,14 @@ def logger_bar(log_file:Optional[str]=None):
         log_file_name=f"{now_time_str}.log"
         log_file=log_dir.joinpath(log_file_name)
     logger.add(
+        sink=log_file,
+        colorize=True,
+        level=os.environ["LEVEL"],
+        format=logger_format,
+        backtrace=True,
+        enqueue=True,
+        rotation="10 MB",
+        retention="10 days",
+        encoding="utf-8"
     )
+    return logger
