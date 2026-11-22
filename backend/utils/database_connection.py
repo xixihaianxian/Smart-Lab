@@ -44,7 +44,3 @@ async def get_db():
             raise
         finally:
             await session.close()
-
-# 表基类
-class BaseModel(DeclarativeBase):
-    pass
