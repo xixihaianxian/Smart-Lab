@@ -2,9 +2,13 @@ from pydantic import BaseModel,Field,ConfigDict
 from typing import Optional
 
 class LoginRequest(BaseModel):
-    username:str=Field(
-        validation_alias="userName",
-        serialization_alias="userName",
+    # username:str=Field(
+    #     validation_alias="userName",
+    #     serialization_alias="userName",
+    # )
+    email:str=Field(
+        validation_alias="email",
+        serialization_alias="email"
     )
     password:str=Field(
         validation_alias="passWord",
@@ -46,7 +50,7 @@ class LoginResponse(BaseModel):
         validation_alias="role",
         serialization_alias="role",
     )
-    email:str=Field(
+    email:Optional[str]=Field(
         validation_alias="email",
         serialization_alias="email",
     )
