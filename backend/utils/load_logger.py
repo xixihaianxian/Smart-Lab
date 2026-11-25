@@ -40,7 +40,6 @@ def logger_bar(log_file:Optional[str]=None):
         log_file=log_dir.joinpath(log_file_name)
     logger.add(
         sink=log_file,
-        colorize=True,
         level=os.environ["LEVEL"],
         format=logger_format,
         backtrace=True,

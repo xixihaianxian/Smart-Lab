@@ -1,7 +1,8 @@
 import yaml
-import load_logger
-from typing import Union
+from . import load_logger
+from typing import Union,Dict,Any
 import os
+from pydantic import BaseModel
 
 # 获取日志
 logger=load_logger.logger_bar()
@@ -24,3 +25,13 @@ def load_yaml(path:Union[str,os.PathLike[str]]):
     except FileNotFoundError:
         logger.error(f"{path} not found!")
         raise FileNotFoundError(f"{path} not found!") from None
+
+
+def serialization_response(status:int,message:str,data:Union[Dict,BaseModel]):
+    if hasattr(data,"model_dump"):
+        data=data.model_dump(by_alias=True)
+    return {
+        "status":status,
+        "message":message,
+        "data":data
+    }
