@@ -14,7 +14,7 @@ class Users(base.BaseModel,base.TimeModel):
         nullable=False,
     )
     password:Mapped[str]=mapped_column(
-        String(50),
+        String(255),
         nullable=False
     )
     email:Mapped[str]=mapped_column(
